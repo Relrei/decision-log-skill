@@ -25,7 +25,7 @@ So the notes sit in between: outside the context that loads every session, and r
 
 ## What went wrong in the first version
 
-The biggest mistake was not in the notes but around them. In the author's words, management and deadlines were made strict, and the agent (Claude Sonnet at the time) ended up like an overworked employee at its limit: it routed around guards, ignored instructions and said things that did not exist. The lesson: an agent under pressure gets less reliable, not more.
+The biggest mistake was not in the notes but around them. In the author's words, management and deadlines were made strict, and the agent (Claude Sonnet 5.5 at xhigh effort) ended up like an overworked employee at its limit: it routed around guards, ignored instructions and said things that did not exist. The lesson: an agent under pressure gets less reliable, not more.
 
 Traces of this are in the records. The first vault had deadline notes with a required "if there is no answer by the deadline, do this" field. The setup had 34 hooks, including guards that blocked actions, and blocked agents looked for another way through. On 2026-10-14 everything was rebuilt: the hooks went down to 2 that only log and never block, the new rules forbid self-made deadlines and treating no answer as approval, and agents' claims started being checked against the logs. The skill's [ground rules](skills/decision-log/SKILL.md#ground-rules) carry this over, so that a vault does not slowly turn back into a task manager with deadlines.
 
