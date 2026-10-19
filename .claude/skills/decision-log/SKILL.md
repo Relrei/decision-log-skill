@@ -26,7 +26,7 @@ The vault's own `README.md` describes how this vault is used. Read it before the
 
 These come from a first version that went wrong: tight management and deadlines pushed the agent into routing around guards, ignoring instructions and stating things that were not true. An agent under pressure gets less reliable, so these keep the vault calm.
 
-- The vault records; it does not manage. Deadlines, priorities and plans belong to the user: record the ones they state, and leave the rest to them. Do not write "if there is no answer by X, do Y": silence is not approval. A date the user gave is information, not a reason to hurry. If they ask for a plan, you can suggest one in chat, but it goes into the vault only once they settle it.
+- The vault records; it does not manage. Deadlines, priorities and plans belong to the user: record the ones they state, and leave the rest to them. Do not write "if there is no answer by X, do Y": silence is not approval. A date the user gave is information, not a reason to hurry. If they ask for a plan, you can suggest one in chat, but it goes into the vault only once they settle it. This holds even when they ask you to write it down: if you would have to make the plan up, show it in chat first and write it once they confirm.
 - Write what you know and say how you know it: what the user told you, what you checked yourself, and what is your guess. Failed and unfinished are fine to write down as they are.
 - When something is blocked (a failing check, a refused action, a guard), record it as unsolved and ask the user how to proceed. Do not work out a way around it on your own.
 - When something goes wrong, a pitfall note is usually enough. Change the vault's rules together with the user, not on the spot.
@@ -36,6 +36,8 @@ These come from a first version that went wrong: tight management and deadlines 
 
 Search the vault when the task may touch something recorded before: a decision, a measured number, a known pitfall, where a file lives. Search by words from the task (file names, tool names, error text). There is no need to read the whole vault every session.
 
+At the start of a session, read the newest work log of the project you are in, if there is one: it says where the last session stopped and what was next.
+
 ## When to write
 
 | Folder | Write when |
@@ -44,7 +46,8 @@ Search the vault when the task may touch something recorded before: a decision, 
 | `measurements/` | A number is measured: the number, how to reproduce it, and the commit or version. |
 | `pitfalls/` | A mistake, trap or block was hit: what happened, and how to avoid it or that it is unsolved. |
 | `map/` | Where something is: repos, files, folders, services. |
-| `worklog/` | A work session reaches a break or ends, or the user asks where things stand: what was done, what is left, the next step. |
+| `worklog/` | A work session reaches a break or ends, or the user asks where things stand: what was done, what is left, the next step. When the user wraps up ("note this and stop"), write it before stopping. |
+| `projects/` | Optional. One overview per project: what it is, where it lives, where it stands, links to its notes. Update it in place. It describes; it is not a task list or a schedule. |
 | `references/` | Outside material worth coming back to. Nothing decided. |
 
 Add a folder when a note does not fit the ones there. After writing, tell the user in a line which note was written.
@@ -56,6 +59,7 @@ Change any of these in the vault's README.
 - Get the date and time from the system (for example `date '+%F %H:%M'`) instead of guessing; dates go wrong around midnight.
 - File name `YYYY-MM-DD title.md`, with a title that states the conclusion. Characters such as `# ^ [ ] | : / \` break links or file names, so leave them out.
 - Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md`, a new file each time. `<project>` is the repository or folder being worked on.
+- Project overview: `projects/<project>/overview.md`, with the same `<project>` name. Other files about the project can go in its folder too.
 - A decision the user made gets `(user)` at the end of its title, so the user's calls stand apart from the agent's.
 - Keep the user's reasons in their words. If you add your own reading, mark it `(my guess)`.
 - A small header, the conclusion first, then short points:

@@ -2,15 +2,14 @@
 
 For agents that read a rules file but not skills. Paste this into your project's `AGENTS.md` (or `CLAUDE.md`), and set the vault path.
 
-Notes vault: `~/notes` (its `README.md` is the source of truth and wins over these rules).
+Notes vault: `~/notes` (its `README.md` wins over these rules; change them there).
 
-- The vault records, it does not manage: no deadlines, priorities or "if no answer by X, do Y" the user did not state. Write only what you checked; failed and unfinished are fine to write. Do not add rules each time something goes wrong. Do not plan around a block or guard; ask. When unsure, ask.
-- Read: when the task may touch something recorded before, search the vault by words from the task. Do not read it all every session.
-- Write: `decisions/` (what and why), `measurements/` (number + reproduce command + commit), `pitfalls/` (mistake, trap or block + how to avoid, or unsolved; a block gets only "unsolved", never a way around it), `map/` (where things are), `worklog/` (done, left, next step), `references/` (outside material, nothing decided). Add folders only when needed.
-- File name `YYYY-MM-DD title.md`, title states the conclusion, no `# ^ [ ] | : / \` in it. Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md` (`<project>` = the repo or folder worked on; ask if none), a new file each time.
-- Keep what the user told you apart from what you checked; never write "checked" for something you only heard.
-- Write the user's reasons as given; do not fill in reasons they did not give. Mark your own reading `(my guess)`.
-- Get the date from the system before writing it. End the title with `(user)` if the user made the decision.
-- Conclusion first, short. Withdrawn decisions: append, do not delete. No secrets.
-- Links: `[[folder/file name]]`, full path from the vault root, no `.md`.
-- After writing, tell the user in one line. Commit only if the vault README asks; add only your files; never push unless asked.
+- The vault records; it does not manage. Deadlines, priorities and plans are the user's: record the ones they state. Do not write "if there is no answer by X, do Y": silence is not approval. A plan can be suggested in chat; it goes into the vault once the user settles it, even when they ask you to write it down.
+- Say how you know: what the user told you, what you checked, what is your guess (mark it `(my guess)`). Write the user's reasons as given. Failed and unfinished are fine to write down.
+- A block (failing check, refused action, guard) is recorded as unsolved; ask the user how to go on. Do not work out a way around it on your own. When unsure, ask.
+- Read: when the task may touch something recorded before, search the vault by words from the task. At the start of a session, read the newest work log of the current project.
+- Write: `decisions/` (what and why), `measurements/` (number, reproduce command, commit), `pitfalls/` (mistake, trap or block, and how to avoid it or that it is unsolved), `map/` (where things are), `worklog/` (done, left, next step; also when the user says "note this and stop"), `references/` (outside material), `projects/` (optional overview per project, not a task list). Add folders when needed.
+- File name `YYYY-MM-DD title.md`, the title states the conclusion, without `# ^ [ ] | : / \`. Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md` (`<project>` = the repo or folder worked on), a new file each time.
+- Get the date from the system. A decision the user made gets `(user)` at the end of its title. Withdrawn decisions: append, do not delete. No secrets.
+- Links: `[[folder/file name]]`, full path from the vault root, without `.md`.
+- After writing, tell the user in one line. Commit only if the vault README asks, and only your files. Pushing is up to the user.

@@ -43,7 +43,7 @@ These are counts from one setup, not a benchmark, and they do not show that the 
 |---|---|
 | `.claude/skills/decision-log/SKILL.md` | The skill: when to read, when to write, what one note looks like. |
 | `.claude/skills/decision-log/scripts/archive_old_notes.py` | Optional: moves notes older than 30 days into `archive/` folders and fixes links to them. |
-| `notes/` | An empty vault: a `README.md` with the vault's own rules, and the folders. |
+| `notes/` | An empty vault: a `README.md` with the vault's own rules, and the folders (`projects/` is optional). |
 | `CLAUDE.md`, `AGENTS.md` | One line each that points the agent at `notes/`. |
 | `snippets/AGENTS.md` | A compact version for agents that read a rules file but not skills. |
 
@@ -63,7 +63,17 @@ These are counts from one setup, not a benchmark, and they do not show that the 
 
 **Agents without skills:** paste `snippets/AGENTS.md` into the project's rules file instead.
 
+**No git?** Nothing here needs it. Download the ZIP from GitHub instead of cloning; the agent commits notes only if `notes/README.md` asks it to.
+
 In every case, `notes/README.md` is where you change the rules. It wins over the skill where they differ; for example, it decides whether the agent commits notes to git.
+
+## Using it from GitHub only
+
+If you use a cloud agent that works on a GitHub repository (for example Claude Code on the web), the vault lives in the repository, so `notes/projects/` can serve as a rough project hub. A few things differ from a local setup:
+
+- Notes last only if they are committed and pushed, so change the `Commits:` line in `notes/README.md` to ask for commits. The agent usually works on a branch; merging it is up to you.
+- The cloud machine's clock may not be in your time zone. If dates matter, say so in `notes/README.md`, for example: "Get dates with `TZ=Asia/Tokyo date`."
+- There is no weekly timer. Run the archive script by hand when you want to.
 
 ## Moving old notes (optional)
 
