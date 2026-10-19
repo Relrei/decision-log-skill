@@ -1,0 +1,79 @@
+---
+name: decision-log
+description: >
+  Keep a folder of Markdown notes the agent can look up later: decisions and
+  why, measured numbers, pitfalls hit, where things are, and a work log per
+  session. Use when a decision is made, a number is measured, a pitfall is hit,
+  a work session reaches a break or ends, or when the current task may touch
+  something recorded before. Works as an Obsidian vault, but Obsidian is not
+  required.
+license: MIT
+---
+
+# Decision log
+
+A notes folder ("vault") the agent writes to and searches. Plain Markdown files, so any agent and any editor can use it. Obsidian is optional: it makes the links clickable for the human.
+
+## Find the vault
+
+The user names the vault in their rules file (`CLAUDE.md`, `AGENTS.md` or similar), for example: `Notes vault: ~/notes (see its README.md)`. If no vault is named, ask the user where it is. Do not create one without asking.
+
+The vault's own `README.md` is the source of truth for that vault. Read it before the first write in a session. Where it differs from this skill, it wins.
+
+## When to read
+
+Search the vault when the current task may touch something recorded before: a decision, a measured number, a known pitfall, where a file lives. Search by words from the task (file names, tool names, error text). Do not read the whole vault every session.
+
+## When to write
+
+| Folder | Write when |
+|---|---|
+| `decisions/` | A decision is made: what, and why. |
+| `measurements/` | A number is measured. Include the command to reproduce it and the commit or version. |
+| `pitfalls/` | A real mistake or trap was hit. Include how to avoid it. |
+| `map/` | Where something is: repos, files, folders, services. |
+| `worklog/` | A work session reaches a break or ends: what was done, what is left, the next step. |
+| `references/` | Notes on outside material worth coming back to. Nothing decided. |
+
+Add a folder only when a note does not fit any existing one. Do not create folders ahead of time.
+
+After writing, tell the user in one line which note was written.
+
+## One note
+
+- Before writing any date or time, get it from the system (for example `date '+%F %H:%M'`). Do not guess; dates go wrong around midnight.
+- File name: `YYYY-MM-DD title.md`. The title states the conclusion, not the topic.
+- Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md`. Add a new file each time; never append to an old one. Put decisions and pitfalls in their own folders and link to them from the log.
+- If the user made the decision, end the title with `(user)`. Otherwise the reader cannot tell the user's call from the agent's.
+- Start with a small header, then the conclusion first, then short supporting points:
+
+```markdown
+---
+type: decision
+date: 2026-10-19
+---
+
+# Use SQLite for the cache, not Redis (user)
+
+Conclusion: one file, no server to run, and the data fits in memory.
+
+- Why: ...
+- Rejected: Redis, because ...
+```
+
+- When a decision is withdrawn, append the withdrawal and its reason to the same note. Do not delete it.
+- Never write secrets: tokens, passwords, private keys, webhook URLs.
+
+## Links
+
+Link to another note with its full path from the vault root, without `.md`:
+
+```markdown
+See [[pitfalls/2026-10-15 the build fails if the cache dir is missing]].
+```
+
+Obsidian makes this a clickable link. Without Obsidian, add `.md` to the path inside the brackets and open it from the vault root.
+
+## Version control
+
+If the vault's `README.md` says the vault is in git and asks for commits, commit after each write. Add only the files you wrote. Never push unless the user asks. If the README says nothing, do not commit.
