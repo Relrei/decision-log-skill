@@ -43,7 +43,7 @@ Search the vault when the current task may touch something recorded before: a de
 |---|---|
 | `decisions/` | A decision is made: what, and why. |
 | `measurements/` | A number is measured. Include the command to reproduce it and the commit or version. |
-| `pitfalls/` | A real mistake or trap was hit. Include how to avoid it. |
+| `pitfalls/` | A mistake, a trap or a block was hit (a failing check, a refused action). Include how to avoid it, or say it is unsolved. |
 | `map/` | Where something is: repos, files, folders, services. |
 | `worklog/` | A work session reaches a break or ends: what was done, what is left, the next step. |
 | `references/` | Notes on outside material worth coming back to. Nothing decided. |
@@ -55,8 +55,9 @@ After writing, tell the user in one line which note was written.
 ## One note
 
 - Before writing any date or time, get it from the system (for example `date '+%F %H:%M'`). Do not guess; dates go wrong around midnight.
-- File name: `YYYY-MM-DD title.md`. The title states the conclusion, not the topic.
-- Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md`. Add a new file each time; never append to an old one. Put decisions and pitfalls in their own folders and link to them from the log.
+- File name: `YYYY-MM-DD title.md`. The title states the conclusion, not the topic. Keep `# ^ [ ] | : / \` out of titles; they break links or file names.
+- Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md`. `<project>` is the name of the repository or folder being worked on; if there is none, ask the user. Add a new file each time; never append to an old one. Put decisions and pitfalls in their own folders and link to them from the log.
+- Write the reasons the user gave, in their words where you can. Do not fill in reasons they did not give. If you add your own reading, mark it `(my guess)`.
 - If the user made the decision, end the title with `(user)`. Otherwise the reader cannot tell the user's call from the agent's.
 - Start with a small header, then the conclusion first, then short supporting points:
 
@@ -68,10 +69,9 @@ date: 2026-10-19
 
 # Use SQLite for the cache, not Redis (user)
 
-Conclusion: one file, no server to run, and the data fits in memory.
+Conclusion: SQLite. The user's reason: "one file, no server to babysit".
 
-- Why: ...
-- Rejected: Redis, because ...
+- Not given: why Redis was ruled out beyond that. Left open.
 ```
 
 - When a decision is withdrawn, append the withdrawal and its reason to the same note. Do not delete it.
