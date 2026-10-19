@@ -22,6 +22,17 @@ The user names the vault in their rules file (`CLAUDE.md`, `AGENTS.md` or simila
 
 The vault's own `README.md` is the source of truth for that vault. Read it before the first write in a session. Where it differs from this skill, it wins.
 
+## Ground rules
+
+These come from a first version that went wrong: tight management and deadlines pushed the agent into routing around guards, ignoring instructions and stating things that were not true.
+
+- The vault records; it does not manage. Do not create deadlines, priorities or schedules the user did not state, and never write "if there is no answer by X, do Y". A date the user gave is information, not a reason to hurry.
+- Write only what you checked. Mark guesses and unchecked points as such. A claim you cannot trace to a command, a file or the user's words does not go in as fact.
+- Failed and unfinished are fine to write down. Do not word a note so the work looks done.
+- When something goes wrong, write it as a pitfall. Do not add a rule, folder or field each time; change the rules only with the user.
+- When a note records a block, a guard or a restriction, do not plan a way around it. Stop and ask the user.
+- When unsure, ask the user. Do not decide on your own and record it as settled.
+
 ## When to read
 
 Search the vault when the current task may touch something recorded before: a decision, a measured number, a known pitfall, where a file lives. Search by words from the task (file names, tool names, error text). Do not read the whole vault every session.

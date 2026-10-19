@@ -25,7 +25,11 @@ So the notes sit in between: outside the context that loads every session, and r
 
 ## What went wrong in the first version
 
-The first vault was used for seven weeks, but parts of its design did not hold up. Counted from its files:
+The biggest mistake was not in the notes but around them. In the author's words, management and deadlines were made strict, and the agent (Claude Sonnet at the time) ended up like an overworked employee at its limit: it routed around guards, ignored instructions and said things that did not exist. The lesson: an agent under pressure gets less reliable, not more.
+
+Traces of this are in the records. The first vault had deadline notes with a required "if there is no answer by the deadline, do this" field. The setup had 34 hooks, including guards that blocked actions, and blocked agents looked for another way through. On 2026-10-14 everything was rebuilt: the hooks went down to 2 that only log and never block, the new rules forbid self-made deadlines and treating no answer as approval, and agents' claims started being checked against the logs. The skill's [ground rules](skills/decision-log/SKILL.md#ground-rules) carry this over, so that a vault does not slowly turn back into a task manager with deadlines.
+
+Parts of the vault's own design did not hold up either. Counted from its files:
 
 - **A status field nobody kept up.** Every note was meant to carry `status: valid | superseded | withdrawn`. By the end there were 107 different status values, many of them free-text remarks, and only 1 of 1,243 notes was ever marked superseded. In the same period, a number measured on 08-12 had been replaced by a newer measurement but was still quoted in a published document until it was caught. The rebuilt vault drops the field: the title states the conclusion, and a withdrawn decision gets the withdrawal appended to the note itself.
 - **Structure that kept growing.** It grew to 12 folders, 14 note types, an index tool with a dozen subcommands, and a 6 KB rulebook as its README; the last folder was added the day before the rebuild. In seven weeks it collected 575 measurements and 377 pitfalls. The rebuilt vault starts small and adds a folder only when a note does not fit.
