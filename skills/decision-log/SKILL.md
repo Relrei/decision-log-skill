@@ -43,7 +43,7 @@ Search the vault when the current task may touch something recorded before: a de
 |---|---|
 | `decisions/` | A decision is made: what, and why. |
 | `measurements/` | A number is measured. Include the command to reproduce it and the commit or version. |
-| `pitfalls/` | A mistake, a trap or a block was hit (a failing check, a refused action). Include how to avoid it, or say it is unsolved. |
+| `pitfalls/` | A mistake, a trap or a block was hit (a failing check, a refused action). Include how to avoid it, or say it is unsolved. For a block, write only that it is unsolved, never a way around it. |
 | `map/` | Where something is: repos, files, folders, services. |
 | `worklog/` | A work session reaches a break or ends: what was done, what is left, the next step. |
 | `references/` | Notes on outside material worth coming back to. Nothing decided. |
@@ -57,6 +57,7 @@ After writing, tell the user in one line which note was written.
 - Before writing any date or time, get it from the system (for example `date '+%F %H:%M'`). Do not guess; dates go wrong around midnight.
 - File name: `YYYY-MM-DD title.md`. The title states the conclusion, not the topic. Keep `# ^ [ ] | : / \` out of titles; they break links or file names.
 - Work log: `worklog/<project>/<YYYY-MM-DD>/<HHMM> title.md`. `<project>` is the name of the repository or folder being worked on; if there is none, ask the user. Add a new file each time; never append to an old one. Put decisions and pitfalls in their own folders and link to them from the log.
+- Keep what the user told you apart from what you checked yourself, and say which is which. Do not write "checked" or "confirmed" for something you only heard.
 - Write the reasons the user gave, in their words where you can. Do not fill in reasons they did not give. If you add your own reading, mark it `(my guess)`.
 - If the user made the decision, end the title with `(user)`. Otherwise the reader cannot tell the user's call from the agent's.
 - Start with a small header, then the conclusion first, then short supporting points:
@@ -89,7 +90,7 @@ Obsidian makes this a clickable link. Without Obsidian, add `.md` to the path in
 
 ## Old notes
 
-Notes older than a month may sit in an `archive/` folder inside their folder (for example `decisions/archive/`), moved there by `scripts/archive_old_notes.py` on a schedule the user sets up. They are not out of date by default. Search them like any other note. An archive folder's `README.md` may list the old notes used most in the last week; check it first when looking for something older. Do not move notes into an archive yourself unless the user asks.
+Notes older than 30 days may sit in an `archive/` folder inside their folder (for example `decisions/archive/`), moved there by `scripts/archive_old_notes.py` on a schedule the user sets up. They are not out of date by default. Search them like any other note. An archive folder's `README.md` may list the old notes used most in the last week; check it first when looking for something older. Do not move notes into an archive yourself unless the user asks.
 
 ## Version control
 
