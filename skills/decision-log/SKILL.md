@@ -14,6 +14,8 @@ license: MIT
 
 A notes folder ("vault") the agent writes to and searches. Plain Markdown files, so any agent and any editor can use it. Obsidian is optional: it makes the links clickable for the human.
 
+This needs an agent that can read and write local files and run commands, such as a CLI coding agent.
+
 ## Find the vault
 
 The user names the vault in their rules file (`CLAUDE.md`, `AGENTS.md` or similar), for example: `Notes vault: ~/notes (see its README.md)`. If no vault is named, ask the user where it is. Do not create one without asking.
@@ -73,6 +75,10 @@ See [[pitfalls/2026-10-15 the build fails if the cache dir is missing]].
 ```
 
 Obsidian makes this a clickable link. Without Obsidian, add `.md` to the path inside the brackets and open it from the vault root.
+
+## Old notes
+
+Notes older than a month may sit in an `archive/` folder inside their folder (for example `decisions/archive/`), moved there by `scripts/archive_old_notes.py` on a schedule the user sets up. They are not out of date by default. Search them like any other note. An archive folder's `README.md` may list the old notes used most in the last week; check it first when looking for something older. Do not move notes into an archive yourself unless the user asks.
 
 ## Version control
 

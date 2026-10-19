@@ -20,6 +20,8 @@ A place the agent writes to and looks things up in. This file is the source of t
 
 Add a folder when a note does not fit. Do not create folders ahead of time.
 
+Notes older than 30 days move into an `archive/` folder inside their folder, if a schedule runs `archive_old_notes.py`. They stay searchable.
+
 ## Rules
 
 - Read: search when the task may touch something recorded here. Not every session.
