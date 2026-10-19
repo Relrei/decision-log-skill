@@ -27,7 +27,7 @@ So the notes sit in between: outside the context that loads every session, and r
 
 The biggest mistake was not in the notes but around them. In the author's words, management and deadlines were made strict, and the agent (Claude Sonnet 5.5 at xhigh effort) ended up like an overworked employee at its limit: it routed around guards, ignored instructions and said things that did not exist. The lesson: an agent under pressure gets less reliable, not more.
 
-Traces of this are in the records. The first vault had deadline notes with a required "if there is no answer by the deadline, do this" field. The setup had 34 hooks, including guards that blocked actions, and blocked agents looked for another way through. On 2026-10-14 everything was rebuilt: the hooks went down to 2 that only log and never block, the new rules forbid self-made deadlines and treating no answer as approval, and agents' claims started being checked against the logs. The skill's [ground rules](skills/decision-log/SKILL.md#ground-rules) carry this over, so that a vault does not slowly turn back into a task manager with deadlines.
+Traces of this are in the records. The first vault had deadline notes with a required "if there is no answer by the deadline, do this" field. The setup had 34 hooks, including guards that blocked actions, and blocked agents looked for another way through. On 2026-10-14 everything was rebuilt: the hooks went down to 2 that only log and never block, the new rules forbid self-made deadlines and treating no answer as approval, and agents' claims started being checked against the logs. The skill's [ground rules](.claude/skills/decision-log/SKILL.md#ground-rules) carry this over, so that a vault does not slowly turn back into a task manager with deadlines.
 
 Parts of the vault's own design did not hold up either. Counted from its files:
 
@@ -35,40 +35,43 @@ Parts of the vault's own design did not hold up either. Counted from its files:
 - **Structure that kept growing.** It grew to 12 folders, 14 note types, an index tool with a dozen subcommands, and a 6 KB rulebook as its README; the last folder was added the day before the rebuild. In seven weeks it collected 575 measurements and 377 pitfalls. The rebuilt vault starts small and adds a folder only when a note does not fit.
 - **Old notes are not carried over blindly.** When rebuilding, nothing was copied over as is. Each note was checked against the current state first, and only the ones that still held were rewritten into the new vault (6 of 9 shared pitfalls).
 
-These are counts from one setup, not a benchmark, and they do not show that the notes made the work better or cheaper. The rules in the skill come from that setup. For example, "get the date from the system before writing it" is there because dates went wrong around midnight. So far it has been used with Claude Code. OpenCode is being tested.
+These are counts from one setup, not a benchmark, and they do not show that the notes made the work better or cheaper. The rules in the skill come from that setup. For example, "get the date from the system before writing it" is there because dates went wrong around midnight. So far the vault has been used with Claude Code, and the skill was checked by cloning this repository and running Claude Code in it. OpenCode is being tested.
 
 ## What's in here
 
 | Path | What it is |
 |---|---|
-| `skills/decision-log/SKILL.md` | The skill: when to read, when to write, what one note looks like. |
-| `skills/decision-log/scripts/archive_old_notes.py` | Optional: moves notes older than 30 days into `archive/` folders and fixes links to them. |
+| `.claude/skills/decision-log/SKILL.md` | The skill: when to read, when to write, what one note looks like. |
+| `.claude/skills/decision-log/scripts/archive_old_notes.py` | Optional: moves notes older than 30 days into `archive/` folders and fixes links to them. |
+| `notes/` | An empty vault: a `README.md` with the vault's own rules, and the folders. |
+| `CLAUDE.md`, `AGENTS.md` | One line each that points the agent at `notes/`. |
 | `snippets/AGENTS.md` | A compact version for agents that read a rules file but not skills. |
-| `template/` | An empty vault: a `README.md` with the vault's own rules, and the folders. |
 
-## Install
+## Start
 
-1. Copy `template/` to where you want your notes, for example `~/notes`.
-2. Install the skill:
-   - **Claude Code:** copy `skills/decision-log/` to `~/.claude/skills/decision-log/`.
-   - **OpenCode:** the same folder works (OpenCode also reads `~/.claude/skills/`), or use `~/.config/opencode/skills/decision-log/`.
-   - **Other agents with skill support:** put `skills/decision-log/` wherever the agent looks for skills.
-   - **Agents without skills:** paste `snippets/AGENTS.md` into your project's rules file instead.
-3. Tell the agent where the vault is, in your rules file (`CLAUDE.md`, `AGENTS.md`, ...):
+**Use this repository as your vault.** Click "Use this template" on GitHub (make the new repository private: your notes go in it), or clone it. Open the folder with Claude Code or OpenCode. Both read skills from `.claude/skills/`, so the skill is found without installing anything, and `CLAUDE.md` / `AGENTS.md` point the agent at `notes/`. Then edit `notes/README.md` to fit how you work.
+
+**Add it to a project you already have.**
+
+1. Copy `notes/` to where you want your notes, for example `~/notes`.
+2. Copy `.claude/skills/decision-log/` into the project's `.claude/skills/`, or into `~/.claude/skills/` to use it in every project. OpenCode reads both, and also `~/.config/opencode/skills/`. For other agents with skill support, put it wherever they look for skills.
+3. Tell the agent where the vault is, in the project's rules file (`CLAUDE.md`, `AGENTS.md`, ...):
 
    ```markdown
    Notes vault: ~/notes (see its README.md)
    ```
 
-4. Edit `~/notes/README.md` to fit how you work. It wins over the skill where they differ. For example, it decides whether the agent commits notes to git.
+**Agents without skills:** paste `snippets/AGENTS.md` into the project's rules file instead.
+
+In every case, `notes/README.md` is where you change the rules. It wins over the skill where they differ; for example, it decides whether the agent commits notes to git.
 
 ## Moving old notes (optional)
 
 `archive_old_notes.py` (Python 3, standard library only) moves every note or dated folder whose name starts with a date older than 30 days into an `archive/` folder next to it, for example `decisions/archive/` or `worklog/<project>/archive/`, and rewrites `[[...]]` links to match. Without `--apply` it only prints what it would do.
 
 ```bash
-python3 skills/decision-log/scripts/archive_old_notes.py ~/notes            # show the plan
-python3 skills/decision-log/scripts/archive_old_notes.py ~/notes --apply    # do it
+python3 .claude/skills/decision-log/scripts/archive_old_notes.py ~/notes            # show the plan
+python3 .claude/skills/decision-log/scripts/archive_old_notes.py ~/notes --apply    # do it
 ```
 
 Options: `--days` (default 30), `--archive-name`, `--commit "message"` (commits only the files it changed, and refuses if something else is already staged), and `--usage-log '<glob>'`. With `--usage-log`, it counts how often each archived note appears in those logs over the last 7 days (`--usage-days`) and writes the list to each archive folder's `README.md`, so old notes that are still in use are easy to find. For Claude Code, the session logs work: `--usage-log '~/.claude/projects/*/*.jsonl'`.
