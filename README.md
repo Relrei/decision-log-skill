@@ -23,6 +23,14 @@ So the notes sit in between: outside the context that loads every session, and r
 - After six days of the rebuilt vault (2026-10-14 to 10-19): 271 notes. That is 100 work logs, 57 measurements, 49 pitfalls, 42 decisions (19 of them the user's own call, marked `(user)`), 9 references, 8 map notes and 6 in two other folders, plus 215 commits.
 - The author's tool logs show the agent read, searched or wrote the vault in 44 of 59 sessions over those six days.
 
+## What went wrong in the first version
+
+The first vault was used for seven weeks, but parts of its design did not hold up. Counted from its files:
+
+- **A status field nobody kept up.** Every note was meant to carry `status: valid | superseded | withdrawn`. By the end there were 107 different status values, many of them free-text remarks, and only 1 of 1,243 notes was ever marked superseded. In the same period, a number measured on 08-12 had been replaced by a newer measurement but was still quoted in a published document until it was caught. The rebuilt vault drops the field: the title states the conclusion, and a withdrawn decision gets the withdrawal appended to the note itself.
+- **Structure that kept growing.** It grew to 12 folders, 14 note types, an index tool with a dozen subcommands, and a 6 KB rulebook as its README; the last folder was added the day before the rebuild. In seven weeks it collected 575 measurements and 377 pitfalls. The rebuilt vault starts small and adds a folder only when a note does not fit.
+- **Old notes are not carried over blindly.** When rebuilding, nothing was copied over as is. Each note was checked against the current state first, and only the ones that still held were rewritten into the new vault (6 of 9 shared pitfalls).
+
 These are counts from one setup, not a benchmark, and they do not show that the notes made the work better or cheaper. The rules in the skill come from that setup. For example, "get the date from the system before writing it" is there because dates went wrong around midnight. So far it has been used with Claude Code. OpenCode is being tested.
 
 ## What's in here
@@ -66,6 +74,10 @@ Run it weekly with cron or a systemd user timer. The agent itself does not need 
 ## Using it with Obsidian
 
 Open the vault folder as a vault in Obsidian. Notes link to each other as `[[folder/file name]]`, with the full path from the vault root, so Obsidian resolves them exactly and the agent can follow them as file paths without Obsidian.
+
+## Make it yours
+
+The folders and rules here fit one person's work. Start with them, and change them as you use it until they fit yours.
 
 ## License
 
