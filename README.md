@@ -92,6 +92,10 @@ Run it weekly with cron or a systemd user timer. The agent itself does not need 
 
 Open the vault folder as a vault in Obsidian. Notes link to each other as `[[folder/file name]]`, with the full path from the vault root, so Obsidian resolves them exactly and the agent can follow them as file paths without Obsidian.
 
+## Related
+
+- [shared-machine-skill](https://github.com/Relrei/shared-machine-skill): for several agent sessions on one machine. Checks CPU, memory and GPU before heavy work and lets sessions tell each other what they run. Separate, so you can use either one alone.
+
 ## Make it yours
 
 The folders and rules here fit one person's work. Start with them, and change them as you use it until they fit yours.
